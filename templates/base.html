@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+{% load bootstrap3 %}
+<html{% if LANGUAGE_CODE %} lang="{{ LANGUAGE_CODE }}"{% endif %}>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="referrer" content="no-referrer"/>
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block bootstrap3_title %}django-bootstrap3 template title{% endblock %}</title>
+    {% bootstrap_css %}
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% if 'javascript_in_head'|bootstrap_setting %}{% bootstrap_javascript jquery=True %}{% endif %}
+    {% block bootstrap3_extra_head %}{% endblock %}
+</head>
+
+<body>
+{% block navbar %}
+    <nav class="navbar navbar-inverse" style="border-radius:0px;height:auto">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'app:index' page=1 %}"><span class="glyphicon glyphicon-piggy-bank"
+                                                                                  aria-hidden="true"></span></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="输入搜索内容">
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if not user.is_authenticated %}
+                        <li><a href="{% url 'app:login' %}">登录</a></li>
+                        <li><a href="{% url 'app:register' %}">注册</a></li>
+                    {% else %}
+                        {#          展示头像#}
+                        <li><a href="{% url 'app:Personal_information' %}"><img src="{% static user.userhead %}"
+                                                                                style="width: 30px;height: 30px;border-radius: 90px;padding: 0px;"/> {{ user.username }}
+                        </a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">个人中心<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'app:Personal_information' %}">个人信息</a></li>
+                                <li><a href="#">我的收藏</a></li>
+                                <li><a href="{% url 'app:send_mail' %}">修改密码</a></li>
+                                <li><a href="{% url 'app:logout' %}">退出登录</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+{% endblock %}
+{% bootstrap_messages %}
+{% block bootstrap3_content %}content{% endblock %}
+{% if not 'javascript_in_head'|bootstrap_setting %}{% bootstrap_javascript jquery=True %}{% endif %}
+{% block bootstrap3_extra_script %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block bootstrap3_title %}
+    {{ data.name }}
+{% endblock %}
+
+{% block bootstrap3_content %}
+    <div class="col-md-2 .col-xs-0"></div>
+    <div class="col-md-8 .col-xs-12">
+        <div class="thumbnail">
+            <img src="{{ data.img_url }}" title="图片" onload="this.onload='';this.src='{% static 'imgs/onload.gif' %}'" onerror="this.onerror='';this.src='{% static '/static/uploads/icon/6c72c3e16145332cff16c64ea73ff580_Y4SclL0.png' %}'" style="height: 500px; ">
+            <div class="caption">
+                <h3>{{ data.name }}</h3>
+                <p>链接：<a href="{{ data.downurl }}">{{ data.downurl }}</a></p>
+                <p>{{ data.password }}</p>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-md-2 .col-xs-0"></div>
+{% endblock %}
+

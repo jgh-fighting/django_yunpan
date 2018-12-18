@@ -1,0 +1,15 @@
+{% extends 'form_base.html' %}
+{% load bootstrap3 %}
+
+{% block panel_body %}
+    <form action="{% url 'app:activate' %}" method="post" class="form">
+      {% csrf_token %}
+{#              {% bootstrap_form_errors form %}#}
+      {% bootstrap_form form %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">
+          {% bootstrap_icon "star" %} 发送激活邮件
+        </button>
+      {% endbuttons %}
+    </form>
+{% endblock %}

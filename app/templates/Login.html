@@ -1,0 +1,15 @@
+{% extends 'form_base.html' %}
+{% load bootstrap3 %}
+
+{% block panel_body %}
+    <form action="{% url 'app:login' %}" method="post" class="form">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">
+          {% bootstrap_icon "star" %} Submit
+        </button>
+      {% endbuttons %}
+    </form>
+    <p><a href="{% url 'app:retrieve' %}">忘记密码？</a></p>
+{% endblock %}

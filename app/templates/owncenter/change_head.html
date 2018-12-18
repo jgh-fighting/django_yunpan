@@ -1,0 +1,24 @@
+{% extends 'form_base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block panel_body %}
+<span>头像:</span><a><img src="{% static user.userhead %}"></a>
+{% endblock %}
+    
+{% block panel_ext %}
+    <ul>
+        <li>
+            <form action="{% url 'app:change_head' %}" method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {#              {% bootstrap_form_errors form %}#}
+                {% bootstrap_form form %}
+                {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    {% bootstrap_icon "star" %} Submit
+                </button>
+                {% endbuttons %}
+            </form>
+        </li>
+    </ul>
+{% endblock %}

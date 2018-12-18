@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block bootstrap3_title %}
+    {{ title }}
+{% endblock %}
+{% block bootstrap3_extra_head %}
+    <style type="text/css">
+        .list-group-item{
+            padding: 20px 30px;
+        }
+        .list-group-item span{
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            font-size: medium;
+        }
+        .panel-body{
+            padding: 10px 30px;
+        }
+        .panel-body span{
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            font-size: medium;
+        }
+        .panel-body img{
+            width: 60px;
+            height: 60px;
+            border-radius: 90px;
+        }
+        .panel-body img:hover{
+            border:2px solid dodgerblue;
+        }
+        .panel-heading{
+            font-size: x-large;
+            padding: 25px 30px;
+        }
+    </style>
+{% endblock %}
+
+{% block bootstrap3_content %}
+   <div class="row">
+        <div class="col-xs-1 col-md-4"></div>
+        <div class="col-xs-10 col-md-4">
+            <div class="panel panel-primary">
+              <div class="panel-heading">{{ title }}</div>
+              <div class="panel-body">
+                  {% block panel_body %}
+
+                  {% endblock %}
+              </div>
+                {% block panel_ext %}
+
+                {% endblock %}
+            </div>
+
+        </div>
+        <div class="col-xs-1 col-md-4"></div>
+    </div>
+
+{% endblock %}
+
